@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "277184874721",
+    "project_id": "emptycell-ff0ce",
+    "storage_bucket": "emptycell-ff0ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277184874721:android:32e8cb8d3fab2285f38fa0",
+        "android_client_info": {
+          "package_name": "com.seyitbursa.emptycell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277184874721-kk8msnpabein44g9348kq2chgueudh7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6Fp9D7Z1aBGMhmdU4tBRuXVi-NJAkpUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277184874721-kk8msnpabein44g9348kq2chgueudh7l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "277184874721-1124k1rcnufdicl8gvsdpsa6k83ofe5q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.seyitbursa.emptycell"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
