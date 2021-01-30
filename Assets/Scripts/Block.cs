@@ -12,6 +12,7 @@ public class Block : MonoBehaviour, IDragHandler,IPointerDownHandler,IPointerUpH
     private CanvasGroup canvasGroup;
     private Tile centerTile;
     private List<Cell> selectedCells;
+    private Canvas uiCanvas;
 
     public TargetBoard targetBoard;
     public GameObject draggingParent;
@@ -131,11 +132,7 @@ public class Block : MonoBehaviour, IDragHandler,IPointerDownHandler,IPointerUpH
         transform.SetParent(draggingParent.transform);
         transform.SetAsLastSibling();
         transform.localScale = new Vector3(constants.scaleFactor, constants.scaleFactor, 0);
-        Vector2 pressPosition = Camera.main.ScreenToWorldPoint(eventData.pressPosition);
-        float xPos = pressPosition.x + Mathf.Abs(tiles.Min(p => p.localPositionInBlock.x));
-        float yPos = pressPosition.y + Mathf.Abs(tiles.Min(p => p.localPositionInBlock.y)) + 3 * (constants.sourceCellSize * constants.scaleFactor);
-        transform.position = new Vector3(xPos,yPos);
-        
+        uiCanvas = draggingParent.GetComponent<Canvas>();
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -150,7 +147,10 @@ public class Block : MonoBehaviour, IDragHandler,IPointerDownHandler,IPointerUpH
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position += new Vector3(eventData.delta.x * constants.scaleFactor / transform.lossyScale.x, eventData.delta.y  * constants.scaleFactor / transform.lossyScale.y, 0);
+        Vector3 position = eventData.position;
+        position.z = uiCanvas.planeDistance;
+        transform.position = uiCanvas.worldCamera.ScreenToWorldPoint(position);
+
         foreach (var cell in targetBoard.cells)
         {
             if (Vector2.Distance(cell.transform.position,transform.position ) <= (constants.sourceCellSize * constants.scaleFactor / 2))

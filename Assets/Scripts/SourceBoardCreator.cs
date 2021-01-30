@@ -11,13 +11,9 @@ public class SourceBoardCreator : MonoBehaviour
 
     private RectTransform rectTransform;
 
-    private void Awake()
-    {
-        rectTransform = GetComponent<RectTransform>();
-    }
-
     private void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
         CreateSourceBoards();
     }
 
@@ -26,21 +22,30 @@ public class SourceBoardCreator : MonoBehaviour
         int sourceBoardCountInRow = (int)rectTransform.rect.width / (int)((constants.sourceCellSize + constants.cellSpacing) * constants.sourceBoardWidth);
         int horizontalLayoutCount = constants.blockSettings.Length / sourceBoardCountInRow + 1;
         GameObject rowObject = null;
+        float pivotY = 0f;
+        int index = 0;
         for (int k = 0; k < constants.blockSettings.Length; k++)
         {
-            if (k % sourceBoardCountInRow == 0)
-            {
-                rowObject = new GameObject("RowObject", typeof(RectTransform));
-                rowObject.transform.SetParent(transform);
+            /*
+                if (k % sourceBoardCountInRow == 0)
+                {
+                    rowObject = new GameObject("RowObject", typeof(RectTransform));
+                    rowObject.transform.SetParent(transform);
 
-                RectTransform rectTransformRow = rowObject.GetComponent<RectTransform>();
-                rectTransformRow.sizeDelta = new Vector2(rectTransform.rect.width, rectTransform.rect.height / horizontalLayoutCount);
+                    RectTransform rectTransformRow = rowObject.GetComponent<RectTransform>();
+                    rectTransformRow.sizeDelta = new Vector2(rectTransform.rect.width, rectTransform.rect.height / horizontalLayoutCount);
+                    rectTransformRow.pivot = new Vector2(0.5f, pivotY);
+                    pivotY += 1;
 
-                HorizontalLayoutGroup horizontalLayoutGroup = rowObject.AddComponent<HorizontalLayoutGroup>();
-                horizontalLayoutGroup.spacing = 5;
-                horizontalLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
-            }
-            CreateSourceBoardWithBlock(k, rowObject.transform);
+                    HorizontalLayoutGroup horizontalLayoutGroup = rowObject.AddComponent<HorizontalLayoutGroup>();
+                    horizontalLayoutGroup.spacing = 5;
+                    horizontalLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
+                    horizontalLayoutGroup.childForceExpandHeight = false;
+                    horizontalLayoutGroup.childForceExpandWidth = false;
+                }
+            */
+            if (k > 0 && k % sourceBoardCountInRow == 0) index++;
+            CreateSourceBoardWithBlock(k, transform.GetChild(index));
         }
     }
 
